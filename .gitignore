@@ -27,10 +27,14 @@ yarn-error.log*
 
 # local env files
 .env*.local
-
+.env.development
 # vercel
 .vercel
 
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+api_response.md
+test.ts
+test.mjs
