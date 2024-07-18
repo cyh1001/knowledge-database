@@ -100,9 +100,9 @@ async function getKnowledgeCardMark(id: string): Promise<string | null> {
 export default async function Notebar({ knowledgeCardId }: { knowledgeCardId: string }) {
   const textMark = await getKnowledgeCardMark(knowledgeCardId)
 
-  if (!textMark) {
-    return <div className="alert alert-warning">No notes available</div>
-  }
+  // if (!textMark) {
+  //   return <div className="alert alert-warning">No notes available</div>
+  // }
 
   return (
     <div className="card bg-base-200 shadow-lg">

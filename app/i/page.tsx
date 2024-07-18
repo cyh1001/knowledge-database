@@ -52,7 +52,7 @@ export default async function HomePage() {
   const originalTextData = await getOriginalTextIds()
   return (
     <div className="container mx-auto px-4 py-8">
-      <Tabs defaultValue="knowledge">
+      <Tabs defaultValue="home">
         <TabsList>
           <TabsTrigger value="home">Home</TabsTrigger>
           <TabsTrigger value="knowledge">Knowledge</TabsTrigger>
@@ -82,7 +82,7 @@ export default async function HomePage() {
         <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
           <Suspense fallback={<div>Loading...</div>}>
             {originalTextData.map((data: { id: string; title: string; text: string }) => (
-              <Link href={`/i/4cf39c7b-6361-4973-840c-168e129f176d/text/${data.id}`}  key={data.id}>
+              <Link href={`/i/4cf39c7b-6361-4973-840c-168e129f176d/original/${data.id}`}  key={data.id}>
                 {/* <TextCard key={data.id} textcard_id={data.id} title={data.title} text={data.text} /> */}
                 <TextCard key={data.id} textcard_id={data.id} />
               </Link>
