@@ -31,7 +31,7 @@ export default async function AIabstract({ knowledgeCardId }: { knowledgeCardId:
   return (
     <div className="card bg-base-200 shadow-lg">
       <div className="card-body">
-        <h3 className="card-title text-xl mb-2">AI Abstract</h3>
+        <h3 className="card-title text-xl mb-2">智能总结</h3>
         <p className="whitespace-pre-wrap">{textAI}</p>
       </div>
     </div>
