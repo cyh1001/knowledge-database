@@ -1,36 +1,28 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Brainy AI 是一款自动化的个人知识管理助手，旨在为人们繁琐复杂的工作带来一束光。
+它通过提高个人生产效率和优化知识库管理，使用户更容易输出内容，帮助用户成为新时代的超级个体。Brainr 的灵感来源于 Linkin Park 的歌曲 "One More Light"，这首歌传达了在黑暗中寻找光明的理念，正如 Brainr 希望通过提供高效的工具和智能化的功能，帮助用户在信息的海洋中找到清晰的方向和解决方案。
 
-## Getting Started
+主要功能和特点：
 
-First, run the development server:
+智能笔记：Brainr 提供强大的笔记功能，支持文本、图片、音频等多种格式，方便用户随时记录灵感和重要信息。
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+知识库管理：用户可以创建和管理自己的知识库，将零散的信息系统化、结构化，便于日后查找和使用。
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+标签和分类：通过标签和分类功能，用户可以对信息进行多维度的整理和归类，提高信息检索的效率。
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+全文搜索：强大的全文搜索功能，帮助用户快速找到所需的信息，无论是笔记、文档还是其他内容。
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+协作功能：Brainr 支持团队协作，用户可以与同事共享笔记和知识库，实时协同工作，提高团队的整体效率。
 
-## Learn More
+跨平台同步：支持多设备同步，用户可以在电脑、手机、平板等多种设备上无缝切换，随时随地访问和管理自己的知识库。
 
-To learn more about Next.js, take a look at the following resources:
+安全保障：Brainr 注重用户数据的安全，采用多重加密技术，确保用户的隐私和数据安全。
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+使用场景：
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+学习和研究：学生和研究人员可以利用 Brainr 记录学习笔记，管理文献资料，进行知识整理和复盘。
+工作和项目管理：职场人士可以用 Brainr 记录会议纪要，跟踪项目进度，管理工作任务，提高工作效率。
+创意和写作：作家、博主和创意工作者可以在 Brainr 中记录灵感，整理素材，规划和撰写文章或作品。
 
-## Deploy on Vercel
+总结：
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Brainr 是一款功能强大且易于使用的知识管理软件，通过高效的工具和智能化的功能，帮助用户更好地管理和利用知识，提高个人和团队的生产效率。无论是学生、职场人士还是创意工作者，Brainr 都能为他们提供强大的支持，助力他们成为新时代的超级个体。灵感来源于 Linkin Park 的 "One More Light"，Brainr 希望成为用户生活和工作中的那束光，照亮前行的道路。
