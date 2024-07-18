@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import { formatDate } from '@/utils/date'
 import { createClient } from '@supabase/supabase-js'
 import Link from 'next/link'
-
+import Providers from '@/components/ProgressBarProvider';
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!

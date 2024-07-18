@@ -1,9 +1,10 @@
-// app/i/page.tsx
 import { createClient } from '@supabase/supabase-js'
 import SearchBar from '@/components/SearchBar'
 import EntryCard from '@/components/EntryCard'
 import Link from 'next/link'
 import { Suspense } from 'react'
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/tabs'
+import TextCard from '@/components/TextCard'
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -16,8 +17,8 @@ async function getKnowledgeCardIds() {
   const { data, error } = await supabase
     .from('knowledge_card')
     .select('id')
-    .order('updated_at', { ascending: false }) // 按照更新时间降序排列
-    // .range() // 禁用分页,获取所有记录
+    .order('updated_at', { ascending: false })
+    .range(0, 100)
 
   if (error) {
     console.error('Error fetching knowledge card ids:', error)
@@ -28,39 +29,74 @@ async function getKnowledgeCardIds() {
   return data.map(card => card.id)
 }
 
-// export default async function HomePage() {
-//   console.log('Rendering HomePage component...')
+async function getOriginalTextIds() {
+  console.log('Fetching original text IDs from Supabase...')
 
-//   const cardIds = await getKnowledgeCardIds()
+  const { data, error } = await supabase
+    .from('original_text')
+    .select('id, title, text')
+    .order('updated_at', { ascending: false })
+    .range(0, 100)
 
-//   console.log(`Fetched ${cardIds.length} knowledge card IDs`)
+  if (error) {
+    console.error('Error fetching original text ids:', error)
+    return []
+  }
 
-//   return (
-//     <div className="container mx-auto px-4 py-8">
-//       <SearchBar />
-//       <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
-//         {cardIds.map((id) => (
-//               <Link href={`/i/4cf39c7b-6361-4973-840c-168e129f176d/card/${id}`}>
-//                 <EntryCard key={id} card_id={id} />
-//               </Link>
-//         ))}
-//       </div>
-//     </div>
-//   )
-// }
+  console.log('Original text IDs fetched:', data)
+  return data
+}
+
 export default async function HomePage() {
   const cardIds = await getKnowledgeCardIds()
-
+  const originalTextData = await getOriginalTextIds()
   return (
     <div className="container mx-auto px-4 py-8">
-      <SearchBar />
-      <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
-        <Suspense fallback={<div>Loading...</div>}>
-          {cardIds.map((id) => (
-            <EntryCard key={id} card_id={id} />
-          ))}
-        </Suspense>
-      </div>
+      <Tabs defaultValue="knowledge">
+        <TabsList>
+          <TabsTrigger value="home">Home</TabsTrigger>
+          <TabsTrigger value="knowledge">Knowledge</TabsTrigger>
+          
+          <TabsTrigger value="review">Review</TabsTrigger>
+        </TabsList>
+        <SearchBar />
+
+        <TabsContent value="knowledge">
+          {/* Knowledge 内容 */}
+          
+          <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+            <Suspense fallback={<div>Loading...</div>}>
+              {cardIds.map((id) => (
+                <Link href={`/i/4cf39c7b-6361-4973-840c-168e129f176d/card/${id}`}>
+                  <EntryCard key={id} card_id={id} />
+                </Link>
+              ))}
+            </Suspense>
+          </div>
+        </TabsContent>
+
+
+        <TabsContent value="home">
+          {/* Home 内容 */}
+        {/* Home 内容 */}
+        <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+          <Suspense fallback={<div>Loading...</div>}>
+            {originalTextData.map((data: { id: string; title: string; text: string }) => (
+              <Link href={`/i/4cf39c7b-6361-4973-840c-168e129f176d/text/${data.id}`}>
+                {/* <TextCard key={data.id} textcard_id={data.id} title={data.title} text={data.text} /> */}
+                <TextCard key={data.id} textcard_id={data.id} />
+              </Link>
+            ))}
+          </Suspense>
+        </div>
+        </TabsContent>
+
+
+        <TabsContent value="review">
+          {/* Review 内容 */}
+          <div>Review content goes here...</div>
+        </TabsContent>
+      </Tabs>
     </div>
   )
 }
