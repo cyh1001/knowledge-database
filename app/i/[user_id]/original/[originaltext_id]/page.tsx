@@ -72,17 +72,15 @@ async function getOriginalText(originaltext_id: string): Promise<OriginalText | 
           <h2 className="card-title text-2xl font-bold mb-4">
             {originalText.title || 'Untitled'}
           </h2>
+          <div className="text-gray-400">
+  上次更新：{new Date(originalText.updated_at).toLocaleDateString()}
+</div>
           <div className="divider"></div>
           <p className="whitespace-pre-wrap">
             {originalText.text || 'No content available'}
           </p>
           <div className="card-actions justify-end mt-4">
-            <div className="badge badge-outline">
-              Created: {new Date(originalText.created_at).toLocaleDateString()}
-            </div>
-            <div className="badge badge-outline">
-              Updated: {new Date(originalText.updated_at).toLocaleDateString()}
-            </div>
+
           </div>
         </div>
       </div>

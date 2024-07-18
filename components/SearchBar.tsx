@@ -143,14 +143,14 @@ export default function SearchBar() {
       />
       {isLoading ? (
         // 显示加载动画
-        <button type="button" className="btn btn-primary loading" disabled>
+        <button type="button" className="btn btn-primary loading " disabled>
           正在处理...
         </button>
       ) : (
         // 显示提交按钮
         <button
           type="submit"
-          className="flex items-center justify-center px-4 py-2 bg-blue-500 text-white rounded"
+          className="flex items-center justify-center px-4 py-2 bg-[#AE2AFE] hover:bg-[#9c27e6] text-white rounded"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

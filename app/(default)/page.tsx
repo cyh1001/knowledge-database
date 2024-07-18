@@ -13,7 +13,7 @@ export default function Home() {
   return (
     <>
 
-      <Header />
+      {/* <Header /> */}
       <Hero />
       {/* <Features />
       <FeaturesBlocks /> */}

@@ -51,14 +51,16 @@ export default async function HomePage() {
   const cardIds = await getKnowledgeCardIds()
   const originalTextData = await getOriginalTextIds()
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 py-8 ">
       <Tabs defaultValue="home">
+      <div className="flex justify-center">
         <TabsList>
           <TabsTrigger value="home">Home</TabsTrigger>
           <TabsTrigger value="knowledge">Knowledge</TabsTrigger>
           
           <TabsTrigger value="review">Review</TabsTrigger>
         </TabsList>
+        </div>
         <SearchBar />
 
         <TabsContent value="knowledge">
@@ -94,7 +96,7 @@ export default async function HomePage() {
 
         <TabsContent value="review">
           {/* Review 内容 */}
-          <div>Review content goes here...</div>
+          <div>这里可以帮你做定期总结，正在开发中</div>
         </TabsContent>
       </Tabs>
     </div>

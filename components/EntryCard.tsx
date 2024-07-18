@@ -56,6 +56,7 @@ export default function EntryCard({ card_id }: { card_id: string }) {
 
   return (
     // <Link href={`/i/4cf39c7b-6361-4973-840c-168e129f176d/card/${card.id}`}>
+    //
     <div className="card bg-base-100 shadow-xl hover:shadow-2xl transition-shadow duration-200">
       <div className="card-body">
         <div className="text-sm text-gray-500 mb-2">
