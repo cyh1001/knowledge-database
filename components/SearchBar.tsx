@@ -137,7 +137,7 @@ export default function SearchBar() {
         type="text"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
-        placeholder="记录你的想法~"
+        placeholder="输入你需要收集的信息，可以自动生成知识卡片哦~"
         className="flex-grow p-2 border rounded"
         disabled={isLoading} // 在加载状态时禁用输入框
       />
