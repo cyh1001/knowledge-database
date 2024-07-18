@@ -43,7 +43,7 @@ export default function Hero() {
           <div className="text-center pb-12 md:pb-16">
           {/* data-aos="zoom-y-out" */}
             <h1 className="text-4xl md:text-5xl font-extrabold leading-tighter tracking-tighter mb-4" data-aos="zoom-y-out">
-              你的日常知识管理 AI 助手
+              你的日常知识管理助手
               {/* Stay ahead of the curve */}
               {/* <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-teal-400">
                 wonderful
