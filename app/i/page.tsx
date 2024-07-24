@@ -19,13 +19,17 @@ async function getKnowledgeCards() {
   const { data, error } = await supabase
     .from('knowledge_card')
     .select()
-    .order('updated_at', { ascending: false })
-    .range(0, 100);
+    // .order('updated_at', { ascending: false })
+    .range(0, 300);
 
   if (error) {
     console.error('Error fetching knowledge cards:', error);
     return [];
   }
+
+  data.sort((a, b) => new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime());
+  const dataCount = data.length;
+  console.log(`获取到 ${dataCount} 条 Knowledge_card 数据`);
 
   // console.log('Knowledge cards fetched:', data);
   return data;
@@ -37,8 +41,8 @@ async function getOriginalTexts() {
   const { data, error } = await supabase
     .from('original_text')
     .select()
-    .order('updated_at', { ascending: false })
-    .range(0, 100);
+    // .order('updated_at', { ascending: false })
+    .range(0, 500);
 
   if (error) {
     console.error('Error fetching original texts:', error);
