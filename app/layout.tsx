@@ -4,6 +4,7 @@ import "./globals.css";
 // import Providers from './providers';
 import Header from "@/components/ui/header";
 import { SessionProvider } from 'next-auth/react';
+import GoogleSignInScript from './GoogleSignInScript';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,9 +23,11 @@ export default function RootLayout({
       <body className={inter.className}>
         <Header />
         <div style={{ flexGrow: 1 }}>
-        <SessionProvider>
+        {/* <SessionProvider>
           {children}
-        </SessionProvider>
+        </SessionProvider> */}
+        {children}
+        <GoogleSignInScript />
         </div>
 
       </body>

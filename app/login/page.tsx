@@ -1,18 +1,37 @@
-// 'use client';
-
-import React from 'react';
-import LoginForm from '@/components/auth/LoginForm';
-
-
-const LoginPage: React.FC = () => {
+import { login, signup } from './actions'
+import GoogleSignIn from '@/components/GoogleSignIn';
+export default function LoginPage() {
   return (
     <div>
-      <LoginForm  />
+    <form>
+      <label htmlFor="email">Email:</label>
+      <input id="email" name="email" type="email" required />
+      <label htmlFor="password">Password:</label>
+      <input id="password" name="password" type="password" required />
+      <button formAction={login}>Log in</button>
+      <button formAction={signup}>Sign up</button>
+    </form>
+    <GoogleSignIn />
     </div>
-  );
-};
+  )
+}
 
-export default LoginPage;
+
+// 'use client';
+
+// import React from 'react';
+// import LoginForm from '@/components/auth/LoginForm';
+
+
+// const LoginPage: React.FC = () => {
+//   return (
+//     <div>
+//       <LoginForm  />
+//     </div>
+//   );
+// };
+
+// export default LoginPage;
 
 
 // import { useEffect } from 'react';
