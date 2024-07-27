@@ -1,3 +1,4 @@
+//  这是原文卡片
 'use client';
 
 import { formatDate } from '@/utils/date';
@@ -13,17 +14,32 @@ type OriginalText = {
 
 export default function TextCard({ text }: { text: OriginalText }) {
   return (
-    <div className="card bg-base-100 shadow-xl hover:shadow-2xl transition-shadow duration-200">
-      <div className="card-body">
-        <div className="text-sm text-gray-500 mb-2">
-          {formatDate(text.updated_at)}
+    <div className="relative">
+      <div
+        className="card bg-base-100 shadow-xl hover:shadow-2xl transition-shadow duration-200 overflow-hidden"
+        style={{ maxHeight: '200px' }} // 设置最大高度限制
+      >
+        <div className="card-body">
+          <p className="text-sm line-clamp-3">{text.text || 'No content available'}</p>
         </div>
-        <h2 className="card-title text-lg mb-2">{text.title || 'Untitled'}</h2>
-        <p className="text-sm line-clamp-3">{text.text || 'No content available'}</p>
       </div>
+      <h2 className="text-lg mt-2">{text.title || 'Untitled'}</h2>
     </div>
+
+    // <div className="card bg-base-100 shadow-xl hover:shadow-2xl transition-shadow duration-200">
+    //   <div className="card-body">
+    //     <div className="text-sm text-gray-500 mb-2">
+    //       {formatDate(text.updated_at)}
+    //     </div>
+    //     <h2 className="card-title text-lg mb-2">{text.title || 'Untitled'}</h2>
+    //     <p className="text-sm line-clamp-3">{text.text || 'No content available'}</p>
+    //   </div>
+    // </div>
   );
 }
+
+
+
 // // /components/TextCard.tsx
 // 'use client'
 

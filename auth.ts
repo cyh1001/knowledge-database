@@ -6,14 +6,14 @@ import { createClient } from '@supabase/supabase-js';
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY!
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
 );
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [GitHub],
   adapter: SupabaseAdapter({
     url: process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    secret: process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY!,
+    secret: process.env.SUPABASE_SERVICE_ROLE_KEY!,
   }),
   // events: {
   //   async signIn({ user }) {
