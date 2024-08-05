@@ -77,7 +77,15 @@ const config = {
   },
   plugins: [require("tailwindcss-animate"),
     require('daisyui'),
+    // require('@tailwindcss/line-clamp'),
   ],
-} satisfies Config
 
+} satisfies Config
+// module.exports = {
+//   // ...其他配置
+//   plugins: [
+//     require('@tailwindcss/line-clamp'),
+//     // ...其他插件
+//   ],
+// },
 export default config
