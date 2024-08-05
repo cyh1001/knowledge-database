@@ -52,7 +52,7 @@ export async function signup(formData: FormData) {
   }
 
   console.log('Signup successful')
-  revalidatePath('/', 'layout')
+  revalidatePath('/i', 'layout')
   console.log('Redirecting to home page')
-  redirect('/')
+  redirect('/i')
 }

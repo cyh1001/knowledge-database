@@ -1,3 +1,75 @@
+import { login, signup } from './actions'
+import GoogleSignIn from '@/components/GoogleSignIn';
+
+export default function LoginPage() {
+  return (
+    <div className="min-h-screen bg-base-200 flex items-center justify-center">
+      <div className="card w-96 bg-base-100 shadow-xl">
+        <div className="card-body">
+          <h2 className="card-title text-2xl font-bold text-center mb-6">Login / Sign Up</h2>
+          <form className="space-y-4">
+            <div className="form-control">
+              <label className="label" htmlFor="email">
+                <span className="label-text">Email</span>
+              </label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                required
+                className="input input-bordered w-full"
+                placeholder="Enter your email"
+              />
+            </div>
+            <div className="form-control">
+              <label className="label" htmlFor="password">
+                <span className="label-text">Password</span>
+              </label>
+              <input
+                id="password"
+                name="password"
+                type="password"
+                required
+                className="input input-bordered w-full"
+                placeholder="Enter your password"
+              />
+            </div>
+            <div className="flex space-x-2 pt-2">
+              <button className="btn btn-primary flex-1" formAction={login}>Log in</button>
+              <button className="btn btn-primary flex-1" formAction={signup}>Sign up</button>
+            </div>
+          </form>
+          {/* Uncomment the line below when you're ready to add Google Sign In */}
+          {/* <div className="divider">OR</div>
+          <GoogleSignIn /> */}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+
+
+// import { login, signup } from './actions'
+// import GoogleSignIn from '@/components/GoogleSignIn';
+// export default function LoginPage() {
+//   return (
+//     <div>
+//     <form>
+//       <label htmlFor="email">Email:</label>
+//       <input id="email" name="email" type="email" required />
+//       <label htmlFor="password">Password:</label>
+//       <input id="password" name="password" type="password" required />
+//       <button formAction={login}>Log in</button>
+//       <button formAction={signup}>Sign up</button>
+//     </form>
+//     {/* <GoogleSignIn /> */}
+//     </div>
+//   )
+// }
+
+
+
 // import { login, signup } from './actions'
 // import Link from 'next/link'
 
@@ -79,23 +151,7 @@
 //   )
 // }
 
-import { login, signup } from './actions'
-import GoogleSignIn from '@/components/GoogleSignIn';
-export default function LoginPage() {
-  return (
-    <div>
-    <form>
-      <label htmlFor="email">Email:</label>
-      <input id="email" name="email" type="email" required />
-      <label htmlFor="password">Password:</label>
-      <input id="password" name="password" type="password" required />
-      <button formAction={login}>Log in</button>
-      <button formAction={signup}>Sign up</button>
-    </form>
-    {/* <GoogleSignIn /> */}
-    </div>
-  )
-}
+
 
 
 // 'use client';

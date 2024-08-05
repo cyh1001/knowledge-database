@@ -104,6 +104,7 @@ export default function SearchBar({ userId }: SearchBarProps) {
         .from('knowledge_card')
         .insert({
           original_text_id: originalTextId,
+          user_id: userId,
           title: title,
           text_ai: textAi,
           text_mark: null, // 如果有标记版本的文本，可以在这里添加
