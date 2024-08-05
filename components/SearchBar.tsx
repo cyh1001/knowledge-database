@@ -15,10 +15,12 @@ interface ApiResponse {
   summary: string
   timestamp: string
 }
-
+interface SearchBarProps {
+  userId: string | null
+}
 console.log('Supabase client initialized')
 
-export default function SearchBar() {
+export default function SearchBar({ userId }: SearchBarProps) {
   const [query, setQuery] = useState('')
   const router = useRouter()
   const [isLoading, setIsLoading] = useState(false) // 新增加载状态
@@ -28,8 +30,8 @@ export default function SearchBar() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
-    if (!query.trim()) {
-      console.log('Empty query, submission aborted')
+    if (!query.trim() || !userId) {
+      console.log('Empty query or user not logged in, submission aborted')
       return
     }
 
@@ -43,7 +45,7 @@ export default function SearchBar() {
       const { data: originalTextData, error: originalTextError } = await supabase
         .from('original_text')
         .insert({
-          user_id: '4cf39c7b-6361-4973-840c-168e129f176d', // 请替换为实际的用户ID
+          user_id: userId, // 请替换为实际的用户ID
           title: query.trim().substring(0, 20), // 使用查询的前20个字符作为标题
           text: query.trim(),
         })
