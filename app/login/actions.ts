@@ -22,13 +22,19 @@ export async function login(formData: FormData) {
 
   if (error) {
     console.error('Login error:', error.message)
-    redirect('/error')
+    if (error.message.includes('Invalid login credentials')) {
+      redirect('/?error=invalid_credentials')
+    } else if (error.message.includes('User not found')) {
+      redirect('/?error=user_not_found')
+    } else {
+      redirect(`/?error=${encodeURIComponent(error.message)}`)
+    }
   }
 
   console.log('Login successful')
-  revalidatePath('/', 'layout')
+  revalidatePath('/i', 'layout')
   console.log('Redirecting to home page')
-  redirect('/')
+  redirect('/i')
 }
 
 export async function signup(formData: FormData) {
@@ -48,11 +54,11 @@ export async function signup(formData: FormData) {
 
   if (error) {
     console.error('Signup error:', error.message)
-    redirect('/error')
+    redirect('/i')
   }
 
   console.log('Signup successful')
-  revalidatePath('/i', 'layout')
+  // revalidatePath('/i', 'layout')
   console.log('Redirecting to home page')
-  redirect('/i')
+  // redirect('/i')
 }

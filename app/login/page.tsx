@@ -1,12 +1,48 @@
 import { login, signup } from './actions'
 import GoogleSignIn from '@/components/GoogleSignIn';
+import { createClient } from '@supabase/supabase-js'
+import { redirect } from 'next/navigation'
+type ParamsProps = {
+  params: {
+    error: string;
+  };
+};
+export default function LoginPage({ params }: ParamsProps) {
+  const supabase = createClient(
 
-export default function LoginPage() {
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+   
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+   
+   )
+  //  const { data: { user }, error: userError } = await supabase.auth.getUser()
+  //  if (userError || !user) {
+  //    console.log('User not authenticated, redirecting to login page')
+  //    redirect('/i')
+  //  }
+  const error = params.error
+  console.log('Error:', error)
+
+  let errorMessage = ''
+  if (error === 'invalid_credentials') {
+    errorMessage = '账户密码错误'
+  } else if (error === 'user_not_found') {
+    errorMessage = '请先注册'
+  } else if (error) {
+    errorMessage = decodeURIComponent(error)
+  }
+
+
   return (
     <div className="min-h-screen bg-base-200 flex items-center justify-center">
       <div className="card w-96 bg-base-100 shadow-xl">
         <div className="card-body">
           <h2 className="card-title text-2xl font-bold text-center mb-6">Login / Sign Up</h2>
+          {/* {errorMessage && (
+            <div className="alert alert-error">
+              {errorMessage}
+            </div>
+          )} */}
           <form className="space-y-4">
             <div className="form-control">
               <label className="label" htmlFor="email">
@@ -38,6 +74,9 @@ export default function LoginPage() {
               <button className="btn btn-primary flex-1" formAction={login}>Log in</button>
               <button className="btn btn-primary flex-1" formAction={signup}>Sign up</button>
             </div>
+            <p className="text-md font-medium text-center mb-4">
+  请先注册再登录。注意检查账户密码是否正确。密码至少包含 6 个字符。
+</p>
           </form>
           {/* Uncomment the line below when you're ready to add Google Sign In */}
           {/* <div className="divider">OR</div>
