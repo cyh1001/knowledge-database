@@ -1,4 +1,5 @@
 // /app/api/summarize/route.ts
+//  这是是使用dify.ai，做文本总结
 import { NextRequest, NextResponse } from 'next/server';
 import axios from 'axios';
 

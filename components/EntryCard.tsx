@@ -16,12 +16,13 @@ type KnowledgeCard = {
 
 export default function EntryCard({ card }: { card: KnowledgeCard }) {
   return (
-    <div className="card bg-base-100 shadow-xl hover:shadow-2xl transition-shadow duration-200">
+    <div className="rounded-md bg-purple-50 card bg-base-100 shadow-md hover:shadow-xl transition-shadow duration-200 overflow-hidden"
+    style={{ maxHeight: '2000px' }}>
       <div className="card-body">
         <div className="text-sm text-gray-500 mb-2">
           {formatDate(card.updated_at)}
         </div>
-        <h2 className="card-title text-lg mb-2">{card.title}</h2>
+        {/* <h2 className="card-title text-lg mb-2 text-gray-600 text-center">{card.title}</h2> */}
         <p className="text-sm line-clamp-3">{card.text_ai}</p>
       </div>
     </div>

@@ -46,24 +46,24 @@ async function getOriginalText(originaltext_id: string): Promise<OriginalText | 
   }
   
   export default async function OriginalPage({ params }: PageProps) {
-    // console.log('OriginalPage component rendering with params:', params)
+    console.log('OriginalPage component rendering with params:', params)
     
     const { originaltext_id } = params  // 使用 originaltext_id
-    // console.log('Extracted originaltext_id:', originaltext_id)
+    console.log('Extracted originaltext_id:', originaltext_id)
   
     if (!originaltext_id) {
-    //   console.error('originaltext_id is undefined or null')
+      console.error('originaltext_id is undefined or null')
       notFound()
     }
   
     const originalText = await getOriginalText(originaltext_id)
   
     if (!originalText) {
-    //   console.error('Original text not found for id:', originaltext_id)
+      console.error('Original text not found for id:', originaltext_id)
       notFound()
     }
   
-    // console.log('Rendering original text:', originalText)
+    console.log('Rendering original text:', originalText)
   
   return (
     <div className="container mx-auto p-4">

@@ -1,3 +1,4 @@
+// /components/SearchBar
 'use client'
 
 import { useState } from 'react'
@@ -19,17 +20,58 @@ interface SearchBarProps {
   userId: string | null
 }
 console.log('Supabase client initialized')
+type InputType = 'text' | 'image' | 'link' | 'file'
 
 export default function SearchBar({ userId }: SearchBarProps) {
+  const [file, setFile] = useState<File | null>(null)
+  const [inputType, setInputType] = useState<InputType>('text')
+
   const [query, setQuery] = useState('')
   const router = useRouter()
   const [isLoading, setIsLoading] = useState(false) // 新增加载状态
 
   console.log('SearchBar component rendered')
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
+  // 处理输入类型变化
+  const handleInputTypeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setInputType(e.target.value as InputType)
+    setQuery('') // 重置查询输入
+    // setFile(null) // 重置文件输入
+  }
 
+  // 获取网页内容的函数
+  const fetchWebContent = async (url: string): Promise<string> => {
+    console.log('Fetching web content for URL:', url)
+    try {
+      const response = await fetch('/api/fetch-web-content', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ url }),
+      })
+      if (!response.ok) throw new Error('Failed to fetch web content')
+      const data = await response.json()
+      console.log('API response:', data)
+      return data.content
+    } catch (error) {
+      console.error('Error fetching web content:', error)
+      throw error
+    }
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    let textToProcess = '';
+if (inputType === 'link') {
+  textToProcess = await fetchWebContent(query);
+  console.log('linktextToProcess:', textToProcess)
+} else {
+  textToProcess = query.trim();
+  console.log('textToProcess:', textToProcess)
+}
+    e.preventDefault()
+    if (!userId) {
+      console.log('User not logged in, submission aborted')
+      return
+    }
     if (!query.trim() || !userId) {
       console.log('Empty query or user not logged in, submission aborted')
       return
@@ -40,6 +82,16 @@ export default function SearchBar({ userId }: SearchBarProps) {
     setQuery('') // 立即清空输入框
 
     try {
+      // 根据输入类型处理内容
+      if (inputType === 'link') {
+        textToProcess = await fetchWebContent(query)
+      }
+
+      if (!textToProcess) {
+        console.log('No content to process')
+        return
+      }
+      
       // 1. 存储查询到 Supabase 的 original_text 表
       console.log('Storing query in Supabase')
       const { data: originalTextData, error: originalTextError } = await supabase
@@ -66,11 +118,11 @@ export default function SearchBar({ userId }: SearchBarProps) {
 
       // 2. 触发summarize API
       console.log('Calling summarize API')
-      console.log('query.trim', query.trim())
+      console.log('query.trim', textToProcess)
       const response = await fetch('/api/summarize', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ text: query.trim() }),
+        body: JSON.stringify({ text: textToProcess }),
       })
 
       if (!response.ok) {
@@ -125,7 +177,7 @@ export default function SearchBar({ userId }: SearchBarProps) {
 
       // 4. 刷新页面或更新UI
       console.log('Refreshing page')
-      router.refresh()
+      // router.refresh()
     } catch (error) {
       console.error('Error in handleSubmit:', error)
       // 在这里处理错误，例如显示一个错误消息给用户
@@ -136,14 +188,58 @@ export default function SearchBar({ userId }: SearchBarProps) {
 
   return (
     <form onSubmit={handleSubmit} className="flex gap-2">
-      <input
+            {/* 输入类型选择下拉菜单 */}
+            {inputType === 'text' && (
+        <input
+          type="text"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="输入你需要收集的信息，可以自动生成知识卡片哦~"
+          className="flex-grow p-2 border rounded"
+          disabled={isLoading}
+        />
+      )}
+
+      {inputType === 'image' && (
+  <div className="p-2 border rounded bg-gray-100 text-gray-600 flex-grow">
+  正在开发中，敬请期待
+</div>
+      )}
+
+      {inputType === 'link' && (
+        <input
+          type="url"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="输入链接..."
+          className="flex-grow p-2 border rounded"
+          disabled={isLoading}
+        />
+      )}
+
+      {inputType === 'file' && (
+  <div className="p-2 border rounded bg-gray-100 text-gray-600 flex-grow">
+  正在开发中，敬请期待
+</div>
+      )}
+      {/* <input
         type="text"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         placeholder="输入你需要收集的信息，可以自动生成知识卡片哦~"
         className="flex-grow p-2 border rounded"
         disabled={isLoading} // 在加载状态时禁用输入框
-      />
+      /> */}
+      <select
+        value={inputType}
+        onChange={handleInputTypeChange}
+        className="p-2 border rounded"
+      >
+        <option value="text">文本</option>
+        <option value="image">图片</option>
+        <option value="link">链接</option>
+        <option value="file">文件</option>
+      </select>
       {isLoading ? (
         // 显示加载动画
         <button type="button" className="btn btn-primary loading " disabled>

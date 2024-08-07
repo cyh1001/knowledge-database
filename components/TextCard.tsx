@@ -16,14 +16,14 @@ export default function TextCard({ text }: { text: OriginalText }) {
   return (
     <div className="relative">
       <div
-        className="card bg-base-100 shadow-xl hover:shadow-2xl transition-shadow duration-200 overflow-hidden"
-        style={{ maxHeight: '200px' }} // 设置最大高度限制
+        className="rounded-md bg-purple-50 card bg-base-100 shadow-md hover:shadow-xl transition-shadow duration-200 overflow-hidden"
+        style={{ maxHeight: '2000px' }} // 设置最大高度限制
       >
         <div className="card-body">
-          <p className="text-sm line-clamp-3">{text.text || 'No content available'}</p>
+          <p className="text-sm line-clamp-6">{text.text || 'No content available'}</p>
         </div>
       </div>
-      <h2 className="text-lg mt-2">{text.title || 'Untitled'}</h2>
+      <h2 className="text-lg mt-2 text-slate-400 text-center">{text.title || 'Untitled'}</h2>
     </div>
 
     // <div className="card bg-base-100 shadow-xl hover:shadow-2xl transition-shadow duration-200">

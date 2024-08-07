@@ -25,7 +25,7 @@ export default async function AIabstract({ knowledgeCardId }: { knowledgeCardId:
   const textAI = await getKnowledgeCardAI(knowledgeCardId)
 
   if (!textAI) {
-    return <div className="alert alert-warning">No AI abstract available</div>
+    return <div>暂无摘要</div>
   }
 
   return (

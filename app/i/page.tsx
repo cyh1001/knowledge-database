@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { Suspense } from 'react'
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/tabs'
 import TextCard from '@/components/TextCard'
+import Masonry from 'react-masonry-css';
 
 // 更新 KnowledgeCard 类型
 type KnowledgeCard = {
@@ -76,6 +77,12 @@ async function getOriginalTexts(userId: string): Promise<OriginalText[]> {
 }
 
 export default async function HomePage() {
+  const breakpointColumnsObj = {
+    default: 4,
+    1100: 3,
+    700: 2,
+    500: 1
+  };
   console.log('Rendering HomePage')
   const supabase = createClient()
 
@@ -118,7 +125,25 @@ export default async function HomePage() {
             </Suspense>
           </div>
         </TabsContent>
-
+        {/* <TabsContent value="home">
+      <div className="mt-8">
+        <Masonry
+          breakpointCols={breakpointColumnsObj}
+          className="flex w-auto -ml-4"
+          columnClassName="pl-4 bg-clip-padding"
+        >
+          <Suspense fallback={<div>Loading...</div>}>
+            {originalTexts.map((text) => (
+              <div key={text.id} className="mb-4">
+                <Link href={`/i/original/${text.id}`}>
+                  <TextCard text={text} />
+                </Link>
+              </div>
+            ))}
+          </Suspense>
+        </Masonry>
+      </div>
+    </TabsContent> */}
         <TabsContent value="home">
           <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
             <Suspense fallback={<div>Loading...</div>}>
