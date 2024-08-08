@@ -10,7 +10,7 @@ export default function Header() {
           <div className="shrink-0 mr-4">
             <Logo />
           </div>
-          <Link href="/" className="text-black font-bold py-2 px-4 rounded transition duration-300 ease-in-out nav-left text-2xl">
+          <Link href="/i" className="text-black font-bold py-2 px-4 rounded transition duration-300 ease-in-out nav-left text-2xl">
             BrainyAI
           </Link>
         </div>

@@ -82,10 +82,18 @@ export default function LoginPage({ params }: ParamsProps) {
           {/* <div className="divider">OR</div>
           <GoogleSignIn /> */}
         </div>
+        
       </div>
+      
     </div>
   )
 }
+
+
+
+
+
+
 
 
 

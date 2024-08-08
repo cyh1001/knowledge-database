@@ -60,6 +60,7 @@ export default function SearchBar({ userId }: SearchBarProps) {
 
   const handleSubmit = async (e: React.FormEvent) => {
     let textToProcess = '';
+    console.log('inputType:', inputType)
 if (inputType === 'link') {
   textToProcess = await fetchWebContent(query);
   console.log('linktextToProcess:', textToProcess)
@@ -72,12 +73,12 @@ if (inputType === 'link') {
       console.log('User not logged in, submission aborted')
       return
     }
-    if (!query.trim() || !userId) {
+    if (!textToProcess || !userId) {
       console.log('Empty query or user not logged in, submission aborted')
       return
     }
 
-    console.log('Submitting query:', query.trim())
+    console.log('Submitting query:', textToProcess)
     setIsLoading(true) // 设置加载状态为 true
     setQuery('') // 立即清空输入框
 
@@ -94,11 +95,14 @@ if (inputType === 'link') {
       
       // 1. 存储查询到 Supabase 的 original_text 表
       console.log('Storing query in Supabase')
+      console.log('query.trim', textToProcess)
+      console.log('userId:', userId)
+      console.log('title:', textToProcess.substring(0, 35))
       const { data: originalTextData, error: originalTextError } = await supabase
         .from('original_text')
         .insert({
           user_id: userId, // 请替换为实际的用户ID
-          title: query.trim().substring(0, 20), // 使用查询的前20个字符作为标题
+          title: query.trim().substring(0, 35), // 使用查询的前20个字符作为标题
           text: query.trim(),
         })
         .select()
@@ -117,13 +121,33 @@ if (inputType === 'link') {
       console.log('Query stored successfully, id:', originalTextId)
 
       // 2. 触发summarize API
-      console.log('Calling summarize API')
-      console.log('query.trim', textToProcess)
-      const response = await fetch('/api/summarize', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ text: textToProcess }),
-      })
+      // console.log('Calling summarize API')
+      // console.log('query.trim', textToProcess)
+
+
+      // const response = await fetch('/api/summarize', {
+      //   method: 'POST',
+      //   headers: { 'Content-Type': 'application/json' },
+      //   body: JSON.stringify({ text: textToProcess }),
+      // })
+      // console.log('Summarize API response:', response)
+    // Calling summarize API
+    console.log('Calling summarize API. Content length:', textToProcess.length);
+    console.log('API endpoint:', '/api/summarize');
+    
+    const requestBody = JSON.stringify({ text: textToProcess });
+    console.log('Request body length:', requestBody.length);
+
+    const response = await fetch('/api/summarize', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: requestBody,
+    });
+
+    console.log('Summarize API response status:', response.status);
+    console.log('Summarize API response OK:', response.ok);
+
+
 
       if (!response.ok) {
         console.error('Summarize API failed:', response.statusText)
@@ -177,7 +201,7 @@ if (inputType === 'link') {
 
       // 4. 刷新页面或更新UI
       console.log('Refreshing page')
-      // router.refresh()
+      router.refresh()
     } catch (error) {
       console.error('Error in handleSubmit:', error)
       // 在这里处理错误，例如显示一个错误消息给用户
