@@ -106,7 +106,7 @@ export default async function CardDetail({ params }: PageProps) {
               <span className="font-semibold">{new Date(card.updated_at).toLocaleDateString()}</span>
             </div>
           </div>
-          <Link href={`/i/${userId}/original/${card.original_text_id}`}>
+          <Link href={`/i/original/${card.original_text_id}`}>
   <button className="btn text-white bg-[#AE2AFE] hover:bg-[#9c27e6] px-6 py-3 mb-4">查看原文</button>
 </Link>
           <div className="flex flex-col md:flex-row gap-4 h-full">
